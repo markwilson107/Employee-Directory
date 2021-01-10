@@ -1,0 +1,4 @@
+tr:hover {
+    background: hsl(188, 47%, 57%, 20%);
+    cursor: pointer;
+}
