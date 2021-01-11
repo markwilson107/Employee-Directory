@@ -1,4 +1,8 @@
-tr:hover {
-    background: hsl(188, 47%, 57%, 20%);
+.El_tr:hover {
+    background: hsl(188, 47%, 57%, 10%);
     cursor: pointer;
+}
+
+table {
+    border: 1px solid rgb(0, 0, 0);
 }
