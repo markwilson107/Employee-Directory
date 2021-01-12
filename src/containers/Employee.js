@@ -114,18 +114,15 @@ class Employee extends Component {
   render() {
     return (
       <div>
-        <Hero backgroundImage="https://i.imgur.com/qkdpN.jpg">
-          <h1>Employee Directory</h1>
-          <h2>Search and filter your employees non-sensitive data.</h2>
-        </Hero>
-        <Container style={{ marginTop: 30 }}>
+        <Hero/>
+        <Container style={{ marginTop: 30, minHeight: 600 }}>
           <Row>
             <Col size="col-md-12">
-              <h1>Employee Directory</h1>
+              <h1>Employee Database</h1>
             </Col>
           </Row>
           <Row>
-            <Col size="col-md-12">
+            <Col size="col-12">
               <Filters catagories={this.state.catagories} handleFilterChange={this.handleFilterChange} handleSortDropdown={this.handleSortDropdown} handleFilterDropdown={this.handleFilterDropdown} sort={this.state.sort} filter={this.state.filter} />
               <EmployeeList result={this.state.employeesList} />
             </Col>

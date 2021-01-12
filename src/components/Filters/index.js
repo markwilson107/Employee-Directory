@@ -11,7 +11,7 @@ function Filters(props) {
                 <Col size="col-12 col-md-6">
                     <div className="dropdown">
                         <button className="btn btn-secondary dropdown-toggle" role="button" id="sortDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <strong>Sort By: </strong>{props.sort.charAt(0).toUpperCase() + props.sort.slice(1)}
+                            Sort By: {props.sort.charAt(0).toUpperCase() + props.sort.slice(1)}
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="sortDropdownMenuLink">
                             {

@@ -4,6 +4,7 @@ import "./style.css";
 function EmployeeList(props) {
 
     return (
+        <div className="El_table">
             <table className="table">
                 <thead className="table-light">
                     <tr>
@@ -28,6 +29,8 @@ function EmployeeList(props) {
                     }
                 </tbody>
             </table>
+
+        </div>
 
     );
 };

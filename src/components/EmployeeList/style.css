@@ -3,6 +3,20 @@
     cursor: pointer;
 }
 
-table {
-    border: 1px solid rgb(0, 0, 0);
+.El_table {
+    width:100%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    border: 1px solid rgb(0, 0, 0,10%);
 }
+.El_table::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+@media only screen and (max-width: 429px) {
+    table {
+        font-size: 12px;
+    }
+}
+
