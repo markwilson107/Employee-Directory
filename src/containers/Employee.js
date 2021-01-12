@@ -25,7 +25,7 @@ class Employee extends Component {
   importEmployees = () => {
     API.getEmployees(10)
       .then(res => {
-        let result = res.data.results.map((row, index) => ({
+        const result = res.data.results.map((row, index) => ({
           id: `${index}`,
           "name (First)": row.name.first,
           "name (Last)": row.name.last,
@@ -90,20 +90,21 @@ class Employee extends Component {
   filterEmployees = search => {
     // Checks employee state is not empty
     if (this.state.employees.length > 1) {
-      //function index(obj,i) {return obj[i]};
       let currentEmployees = this.state.employees;
-      let newEmployees = [];
       const filter = this.state.filter;
-      currentEmployees.find(function (row, index) {
+      let newEmployees = [];
+      currentEmployees.find((row, index) => {
         let keywords = ``;
         if (filter === "all") {
-          keywords = `${row.id} ${row.fullname} ${row.location} ${row.age} ${row.gender}`;
-        } else {
+          keywords = `${row.id} ${row.fullname.toLowerCase()} ${row.location.toLowerCase()} ${row.age} ${row.gender.toLowerCase()}`;
+        } else if (filter === "id" || filter === "age") {
           keywords = `${row[filter]}`;
-        }
-        if (keywords.indexOf(search) != -1) {
+        } else {
+          keywords = `${row[filter].toLowerCase()}`;
+        };
+        if (keywords.indexOf(search.toLowerCase()) != -1) {
           newEmployees.push(row);
-        }
+        };
       });
       let newState = { ...this.state };
       newState.employeesList = newEmployees;
@@ -114,20 +115,22 @@ class Employee extends Component {
   render() {
     return (
       <div>
-        <Hero/>
-        <Container style={{ marginTop: 30, minHeight: 600 }}>
-          <Row>
-            <Col size="col-md-12">
-              <h1>Employee Database</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col size="col-12">
-              <Filters catagories={this.state.catagories} handleFilterChange={this.handleFilterChange} handleSortDropdown={this.handleSortDropdown} handleFilterDropdown={this.handleFilterDropdown} sort={this.state.sort} filter={this.state.filter} />
-              <EmployeeList result={this.state.employeesList} />
-            </Col>
-          </Row>
-        </Container>
+        <Hero />
+        <div style={{ backgroundColor: "white" }}>
+          <Container style={{ minHeight: 600 }}>
+            <Row>
+              <Col size="col-md-12">
+                <h1 style={{marginTop: 20}}>Employee Database</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col size="col-12">
+                <Filters catagories={this.state.catagories} handleFilterChange={this.handleFilterChange} handleSortDropdown={this.handleSortDropdown} handleFilterDropdown={this.handleFilterDropdown} sort={this.state.sort} filter={this.state.filter} />
+                <EmployeeList result={this.state.employeesList} />
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
     );
   }

@@ -9,20 +9,32 @@
 - [Contributing](#contributing)
 - [Questions](#questions)
 - [License](#license)
-- [Application Image](#application-image)
+
+ ![Image of Application]( "https://github.com/markwilson107/Employee-Directory/images/application-image.png" )
+
 
 ## Description
 
-This is React application loads user data and displays it in an interactive table.
+This is React application loads user data from randomuser.me and displays it in an sortable, filterable table.
 
 ## Usage
 
+Clone this repository:
+
+`$ git clone https://github.com/markwilson107/Employee-Directory.git`
+
 To start the application run:
 
-### `npm start`
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+#### or
+
+Demo deployed application:
+
+www.abc.com
 
 ## Contributing
 
@@ -41,8 +53,4 @@ If you have any questions feel free to contact me here:
 [MIT](https://opensource.org/licenses/MIT)
 
 You have the freedom to do as you like with this permissive software, as long as an original copy and license notice is included.
-
-## Application Image
-
- ![Image of Application]( )
 
