@@ -10,8 +10,7 @@
 - [Questions](#questions)
 - [License](#license)
 
- ![Image of Application]( "https://github.com/markwilson107/Employee-Directory/blob/main/images/application-image.png" )
-
+ ![Image of Application](https://github.com/markwilson107/Employee-Directory/blob/main/images/application-image.png)
 
 ## Description
 
