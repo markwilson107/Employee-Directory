@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+![Image of Application](https://github.com/markwilson107/Employee-Directory/blob/main/images/application-image.png)
+
 ### Table of Contents
 
 - [Description](#description)
@@ -9,8 +11,6 @@
 - [Contributing](#contributing)
 - [Questions](#questions)
 - [License](#license)
-
- ![Image of Application](https://github.com/markwilson107/Employee-Directory/blob/main/images/application-image.png)
 
 ## Description
 
@@ -33,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Demo deployed application:
 
-www.abc.com
+https://employee-directory-mark-wilson.herokuapp.com/
 
 ## Contributing
 
