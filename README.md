@@ -46,7 +46,7 @@ If you have any questions feel free to contact me here:
 
  ##### Github: [github.com/markwilson107](https://github.com/markwilson107)
 
- ##### Email: [markwilson107@hotmail.com](mailto:markashwilson@gmail.com?subject=[GitHub])
+ ##### Email: [markashwilson@gmail.com](mailto:markashwilson@gmail.com?subject=[GitHub])
 
 ## License
 

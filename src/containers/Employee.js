@@ -6,11 +6,15 @@ import Row from "../components/Row";
 import Col from "../components/Col";
 import EmployeeList from "../components/EmployeeList";
 import Filters from "../components/Filters";
+import Pagination from "../components/Pagination";
 
 class Employee extends Component {
   state = {
     employees: [],
-    employeesList: [],
+    employeesList: [[]],
+    maxPages: 0,
+    page: 0,
+    chunkSize: 10,
     sort: "id",
     filter: "all",
     catagories: ["id", "name (First)", "name (Last)", "location", "age", "gender"]
@@ -18,15 +22,30 @@ class Employee extends Component {
 
   // When the component mounts, load the employee data
   componentDidMount() {
-    this.importEmployees();
+    this.importEmployees(30);
   };
 
+  paginationChunks(result) {
+      let employeeChunks = [];
+      let chunkSize = this.state.chunkSize
+      for (let i = 0; i < result.length; i += chunkSize) {
+        employeeChunks.push(result.slice(i, i + chunkSize));
+      }
+      if (employeeChunks.length < 1)
+        return [[]];
+      return employeeChunks;
+  };
+
+  importError() {
+    return
+  }
+
   // Import new set of employee data
-  importEmployees = () => {
-    API.getEmployees(10)
+  importEmployees = (amount) => {
+    API.getEmployees(amount)
       .then(res => {
         const result = res.data.results.map((row, index) => ({
-          id: `${index}`,
+          id: index+1,
           "name (First)": row.name.first,
           "name (Last)": row.name.last,
           fullname: `${row.name.first} ${row.name.last}`,
@@ -42,16 +61,20 @@ class Employee extends Component {
         const newState = { ...this.state };
         newState.employees = result;
         newState.employeesList = result;
+        newState.maxPages = Math.ceil(result.length / this.state.chunkSize);
         this.setState(newState);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.importError()
+      });
   };
 
-  sortEmployees = sortBy => {
+  sortEmployees = (result, sortBy) => {
     // Checks employee state is not empty
-    if (this.state.employeesList.length > 1) {
+    if (result.length > 0) {
       //function index(obj,i) {return obj[i]};
-      let currentEmployees = this.state.employeesList;
+      let currentEmployees = result;
       currentEmployees.sort((a, b) => {
         if (a[sortBy] < b[sortBy])
           return -1;
@@ -69,7 +92,7 @@ class Employee extends Component {
     event.preventDefault();
 
     const dataValue = event.target.attributes.getNamedItem("data-value").value;
-    this.sortEmployees(dataValue);
+    this.sortEmployees(this.state.employeesList, dataValue);
     let newState = { ...this.state };
     newState.sort = dataValue;
     this.setState(newState);
@@ -108,9 +131,29 @@ class Employee extends Component {
       });
       let newState = { ...this.state };
       newState.employeesList = newEmployees;
-      this.setState(newState);
+      newState.maxPages = Math.ceil(newEmployees.length / newState.chunkSize);
+      newState.page = 0;
+      this.sortEmployees(newEmployees, newState.sort);
+      this.setState(newState);      
     }
   };
+
+  changePage = event => {
+    event.preventDefault();
+    let newState = { ...this.state };
+    newState.page = parseInt(event.target.attributes.getNamedItem("data-value").value);
+    this.setState(newState);
+  };
+
+  handleChunksDropdown = event => {
+    event.preventDefault();
+    let size = parseInt(event.target.attributes.getNamedItem("data-value").value);
+    let newState = { ...this.state };
+    newState.chunkSize = size;
+    newState.maxPages = Math.ceil(newState.employeesList.length / size);
+    newState.page = 0;    
+    this.setState(newState);
+  }
 
   render() {
     return (
@@ -120,14 +163,17 @@ class Employee extends Component {
           <Container style={{ minHeight: 600 }}>
             <Row>
               <Col size="col-md-12">
-                <h1 style={{marginTop: 20}}>Employee Database</h1>
+                <h1 style={{ marginTop: 20 }}>Employee Database</h1>
               </Col>
             </Row>
             <Row>
               <Col size="col-12">
                 <Filters catagories={this.state.catagories} handleFilterChange={this.handleFilterChange} handleSortDropdown={this.handleSortDropdown} handleFilterDropdown={this.handleFilterDropdown} sort={this.state.sort} filter={this.state.filter} />
-                <EmployeeList result={this.state.employeesList} />
+                <EmployeeList result={this.paginationChunks(this.state.employeesList)} page={this.state.page} />
               </Col>
+            </Row>
+            <Row>
+              <Pagination changePage={this.changePage} handleChunksDropdown={this.handleChunksDropdown} chunks={this.state.chunkSize} maxPages={this.state.maxPages} page={this.state.page} />
             </Row>
           </Container>
         </div>
