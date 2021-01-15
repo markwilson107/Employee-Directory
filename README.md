@@ -33,6 +33,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Demo deployed application:
 
+Github pages:
+https://markwilson107.github.io/Employee-Directory/
+
+Heroku:
 https://employee-directory-mark-wilson.herokuapp.com/
 
 ## Contributing
