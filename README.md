@@ -22,6 +22,10 @@ Clone this repository:
 
 `$ git clone https://github.com/markwilson107/Employee-Directory.git`
 
+Install dependencies:
+
+`$ npm install`
+
 To start the application run:
 
 `$ npm start`
